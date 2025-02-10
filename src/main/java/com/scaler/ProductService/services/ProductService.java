@@ -4,5 +4,5 @@ import com.scaler.ProductService.models.Product;
 
 public interface ProductService {
 
-    public Product getProductById(int id);
+    public Product getProductById(long id);
 }
