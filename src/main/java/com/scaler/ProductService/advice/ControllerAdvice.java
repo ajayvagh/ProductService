@@ -1,6 +1,7 @@
 package com.scaler.ProductService.advice;
 
 
+import com.scaler.ProductService.exceptions.InvalidRequestException;
 import com.scaler.ProductService.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,11 @@ public class ControllerAdvice {
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<String> getProductNotFoundException(ProductNotFoundException e){
 
+        return new ResponseEntity<>(e.getMessage(), HttpStatusCode.valueOf(400));
+    }
+
+    @ExceptionHandler(InvalidRequestException.class)
+    public ResponseEntity<String> handleInvalidRequestException(InvalidRequestException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatusCode.valueOf(400));
     }
 
