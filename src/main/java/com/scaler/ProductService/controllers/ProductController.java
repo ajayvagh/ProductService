@@ -7,10 +7,12 @@ import com.scaler.ProductService.models.Product;
 import com.scaler.ProductService.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -59,6 +61,16 @@ public class ProductController {
     public void deleteProduct(@PathVariable UUID id) throws ProductNotFoundException {
         productService.deleteProduct(id);
     }
+
+    @GetMapping
+    public ResponseEntity<Page<Product>> getAllProducts(
+            @RequestParam(value = "pageSize", defaultValue = "20") int pageSize,
+            @RequestParam(value = "pageNum", defaultValue = "0") int pageNum
+    ) {
+        Page<Product> products = productService.getAllProductsNew(pageSize, pageNum);
+        return ResponseEntity.ok(products);
+    }
+
 
 
 }

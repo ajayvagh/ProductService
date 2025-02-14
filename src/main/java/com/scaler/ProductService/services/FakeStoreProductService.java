@@ -4,7 +4,10 @@ import com.scaler.ProductService.dtos.FakeStoreProductDto;
 import com.scaler.ProductService.exceptions.ProductNotFoundException;
 import com.scaler.ProductService.models.Product;
 import com.scaler.ProductService.repository.ProductRepository;
+//import org.hibernate.query.Page;
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -47,6 +50,11 @@ public class FakeStoreProductService implements ProductService {
     public void deleteProduct(UUID id) throws ProductNotFoundException {
     }
 
+    @Override
+    public Page<Product> getAllProductsNew(int pageSize, int pageNum) {
+        return null;
+    }
+
     private Product convertFakeStoreProductDtoToProduct(FakeStoreProductDto dto) {
         Product product = new Product();
         product.setCategory(dto.getCategory());
@@ -55,6 +63,7 @@ public class FakeStoreProductService implements ProductService {
 
         return product;
     }
+
 
 
 }

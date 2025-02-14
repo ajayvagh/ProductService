@@ -4,6 +4,8 @@ import com.scaler.ProductService.exceptions.ProductNotFoundException;
 import com.scaler.ProductService.models.Product;
 import com.scaler.ProductService.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,6 +54,12 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductNotFoundException("Product not found");
         }
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Product> getAllProductsNew(int pageSize, int pageNum) {
+
+        return productRepository.findAll(PageRequest.of(pageNum, pageSize));
     }
 
 }
