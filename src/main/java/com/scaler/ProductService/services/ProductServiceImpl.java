@@ -6,6 +6,7 @@ import com.scaler.ProductService.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,8 +59,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> getAllProductsNew(int pageSize, int pageNum) {
+        pageSize = Math.min(pageSize, 20);
 
-        return productRepository.findAll(PageRequest.of(pageNum, pageSize));
+        return productRepository.findAll(PageRequest.of(pageNum, pageSize,
+                Sort.by("name").ascending().and(
+                        Sort.by("category").descending()
+                )));
     }
 
 }
