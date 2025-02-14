@@ -8,12 +8,13 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity(name = "products")
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

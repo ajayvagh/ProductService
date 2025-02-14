@@ -20,7 +20,7 @@ import java.util.UUID;
 public class ProductController {
 
     @Autowired
-    @Qualifier("dbImpl")
+    @Qualifier("FakeStore")
     private ProductService productService;
 
 //    GET /products/{product_id}
